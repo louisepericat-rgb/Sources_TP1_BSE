@@ -19,7 +19,8 @@
 #define LED_OFF 0
 
 sbit LED = P1^6;  // LED
-sbit BP = P3^7; 	// Bouton poussoir 
+sbit BP = P3^7; 	// Bouton poussoir
+sbit VISU_INT7_START = P2^0;
 
 bit ACK_BP = 1; // vérif si bp relaché: 1 = attente 0 = déjà appuyé
 bit ETAT_LED = 1; // si clignote(1) ou eteint(0)
@@ -43,6 +44,10 @@ void main (void) {
 				
 				P3IF &= 0xF7; //masque bit 3 à 0
 				P3IF &= 0x7F; //masque bit 7 à 0
+	
+				P2NDOUT |= 0x01; //push pull 
+				P74OUT |= 0x10;		//push pull
+				P6 &= 0xFC;		// met à 0		
 	
 	//configure un GPIO:
 				EIE2 |= 0x20; // interupteur int7 au bit 5
@@ -75,8 +80,17 @@ void main (void) {
 
 void Interruption_Bouton_INT7(void)interrupt 19
 {
-		P3IF &= 0x7F;
+		P6 |= 0x02;
+	
+		VISU_INT7_START = 1;
+		VISU_INT7_START = 0;
+		
+		P3IF &= 0x7F; //efface le flag
 		ETAT_LED = !ETAT_LED;
+		
+		P6 |= 0x01; met à 0
+		P6 &= 0xFE; met à 1
+		P6 &= OxFD; 
 }
 		
 //*****************************************************************************	 

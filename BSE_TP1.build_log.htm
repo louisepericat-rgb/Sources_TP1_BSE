@@ -25,14 +25,22 @@ C:\Users\louis\OneDrive\Documents\CPELyon\4A\BSE\Sources_TP1_BSE\BSE_TP1.uvproj
 Project File Date:  11/06/2026
 
 <h2>Output:</h2>
-Build target 'Target 1'
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
 compiling TP1_BSE_Main.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?SOFTWARE_DELAY_10MICRO?TP1_BSE_LIB_DIVERS
-Program Size: data=15.2 xdata=0 code=311
-"BSE_TP1" - 0 Error(s), 1 Warning(s).
-Build Time Elapsed:  00:00:00
+TP1_BSE_Main.c(48): error C202: 'P2NDOUT': undefined identifier
+TP1_BSE_Main.c(91): error C100: unprintable character 0xE0 skipped
+TP1_BSE_Main.c(91): error C202: 'met': undefined identifier
+TP1_BSE_Main.c(91): error C141: syntax error near '0', expected ';'
+TP1_BSE_Main.c(92): error C141: syntax error near 'P6', expected ';'
+TP1_BSE_Main.c(92): error C100: unprintable character 0xE0 skipped
+TP1_BSE_Main.c(92): error C202: 'met': undefined identifier
+TP1_BSE_Main.c(92): error C141: syntax error near '1', expected ';'
+TP1_BSE_Main.c(93): error C141: syntax error near 'P6', expected ';'
+compiling TP1_BSE_Lib_Config_Globale.c...
+compiling TP1_BSE_Lib_Divers.C...
+Target not created.
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

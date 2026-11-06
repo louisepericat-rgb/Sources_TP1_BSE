@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   TP1_BSE_LIB_CONFIG_GLOBALE                                        11/06/2026 17:04:30 PAGE 1   
+C51 COMPILER V9.59.0.0   TP1_BSE_LIB_CONFIG_GLOBALE                                        11/06/2026 17:31:54 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TP1_BSE_LIB_CONFIG_GLOBALE
@@ -62,7 +62,7 @@ line level    source
   52   1          P3 = 0;
   53   1          P3MDOUT = 0xFF;
   54   1      // Fin de la config à intêret pédagogique
-C51 COMPILER V9.59.0.0   TP1_BSE_LIB_CONFIG_GLOBALE                                        11/06/2026 17:04:30 PAGE 2   
+C51 COMPILER V9.59.0.0   TP1_BSE_LIB_CONFIG_GLOBALE                                        11/06/2026 17:31:54 PAGE 2   
 
   55   1      }
   56          

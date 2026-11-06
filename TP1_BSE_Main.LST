@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   TP1_BSE_MAIN                                                      11/06/2026 17:06:19 PAGE 1   
+C51 COMPILER V9.59.0.0   TP1_BSE_MAIN                                                      11/06/2026 17:31:54 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TP1_BSE_MAIN
@@ -28,80 +28,91 @@ line level    source
   19          #define LED_OFF 0
   20          
   21          sbit LED = P1^6;  // LED
-  22          sbit BP = P3^7;   // Bouton poussoir 
-  23          
-  24          bit ACK_BP = 1; // vérif si bp relaché: 1 = attente 0 = déjà appuyé
-  25          bit ETAT_LED = 1; // si clignote(1) ou eteint(0)
-  26          
+  22          sbit BP = P3^7;   // Bouton poussoir
+  23          sbit VISU_INT7_START = P2^0;
+  24          
+  25          bit ACK_BP = 1; // vérif si bp relaché: 1 = attente 0 = déjà appuyé
+  26          bit ETAT_LED = 1; // si clignote(1) ou eteint(0)
   27          
   28          
-  29          //------------------------------------------------------------------------------------
-  30          // Function Prototypes
-  31          
-  32          //------------------------------------------------------------------------------------
+  29          
+  30          //------------------------------------------------------------------------------------
+  31          // Function Prototypes
+  32          
   33          //------------------------------------------------------------------------------------
-  34          
-  35          //-----------------------------------------------------------------------------
-  36          // MAIN Routine
-  37          //-----------------------------------------------------------------------------
-  38          void main (void) {
-  39   1        
-  40   1              Init_Device();
-  41   1              P3MDOUT &= 0x7F; // masque pour bit 7 à 0
-  42   1              BP = 1; // ouvre le drain 
-  43   1              
-  44   1              P3IF &= 0xF7; //masque bit 3 à 0
-  45   1              P3IF &= 0x7F; //masque bit 7 à 0
-  46   1        
-  47   1        //configure un GPIO:
-  48   1              EIE2 |= 0x20; // interupteur int7 au bit 5
-  49   1              EA = 1;   // interupteur général
-  50   1              
+  34          //------------------------------------------------------------------------------------
+  35          
+  36          //-----------------------------------------------------------------------------
+  37          // MAIN Routine
+  38          //-----------------------------------------------------------------------------
+  39          void main (void) {
+  40   1        
+  41   1              Init_Device();
+  42   1              P3MDOUT &= 0x7F; // masque pour bit 7 à 0
+  43   1              BP = 1; // ouvre le drain 
+  44   1              
+  45   1              P3IF &= 0xF7; //masque bit 3 à 0
+  46   1              P3IF &= 0x7F; //masque bit 7 à 0
+  47   1        
+  48   1              P2NDOUT |= 0x01; //push pull 
+*** ERROR C202 IN LINE 48 OF TP1_BSE_Main.c: 'P2NDOUT': undefined identifier
+  49   1              P74OUT |= 0x10;   //push pull
+  50   1              P6 &= 0xFC;   // met à 0    
   51   1        
-  52   1              while(1)
-  53   1              {  
-  54   2                /*if( BP == 1 && ACK_BP == 1 ){
-  55   2                  ACK_BP = 0;
-C51 COMPILER V9.59.0.0   TP1_BSE_MAIN                                                      11/06/2026 17:06:19 PAGE 2   
+  52   1        //configure un GPIO:
+  53   1              EIE2 |= 0x20; // interupteur int7 au bit 5
+  54   1              EA = 1;   // interupteur général
+C51 COMPILER V9.59.0.0   TP1_BSE_MAIN                                                      11/06/2026 17:31:54 PAGE 2   
 
-  56   2                  ETAT_LED = !ETAT_LED;
-  57   2                }
-  58   2                else if ( BP == 0 ){
-  59   2                  ACK_BP = 1;
-  60   2                }*/
-  61   2      
-  62   2                if ( ETAT_LED == 1)
-  63   2                {
-  64   3                 LED = LED_ON;
-  65   3                 Software_Delay(2); // Temporisation 20ms
-  66   3                 LED = LED_OFF;
-  67   3                 Software_Delay(10); // Temporisation 100ms   
-  68   3                }
-  69   2                if  ( ETAT_LED == 0)
-  70   2                {
-  71   3                  LED = LED_OFF;
-  72   3                }
-  73   2              }                           
-  74   1            }
-  75          
-  76          void Interruption_Bouton_INT7(void)interrupt 19
-  77          {
-  78   1          P3IF &= 0x7F;
-  79   1          ETAT_LED = !ETAT_LED;
-  80   1      }
-  81              
-  82          //*****************************************************************************  
+  55   1              
+  56   1        
+  57   1              while(1)
+  58   1              {  
+  59   2                /*if( BP == 1 && ACK_BP == 1 ){
+  60   2                  ACK_BP = 0;
+  61   2                  ETAT_LED = !ETAT_LED;
+  62   2                }
+  63   2                else if ( BP == 0 ){
+  64   2                  ACK_BP = 1;
+  65   2                }*/
+  66   2      
+  67   2                if ( ETAT_LED == 1)
+  68   2                {
+  69   3                 LED = LED_ON;
+  70   3                 Software_Delay(2); // Temporisation 20ms
+  71   3                 LED = LED_OFF;
+  72   3                 Software_Delay(10); // Temporisation 100ms   
+  73   3                }
+  74   2                if  ( ETAT_LED == 0)
+  75   2                {
+  76   3                  LED = LED_OFF;
+  77   3                }
+  78   2              }                           
+  79   1            }
+  80          
+  81          void Interruption_Bouton_INT7(void)interrupt 19
+  82          {
+  83   1          P6 |= 0x02;
+  84   1        
+  85   1          VISU_INT7_START = 1;
+  86   1          VISU_INT7_START = 0;
+  87   1          
+  88   1          P3IF &= 0x7F; //efface le flag
+  89   1          ETAT_LED = !ETAT_LED;
+  90   1          
+  91   1          P6 |= 0x01; met à 0
+*** ERROR C100 IN LINE 91 OF TP1_BSE_Main.c: unprintable character 0xE0 skipped
+*** ERROR C202 IN LINE 91 OF TP1_BSE_Main.c: 'met': undefined identifier
+*** ERROR C141 IN LINE 91 OF TP1_BSE_Main.c: syntax error near '0', expected ';'
+  92   1          P6 &= 0xFE; met à 1
+*** ERROR C141 IN LINE 92 OF TP1_BSE_Main.c: syntax error near 'P6', expected ';'
+*** ERROR C100 IN LINE 92 OF TP1_BSE_Main.c: unprintable character 0xE0 skipped
+*** ERROR C202 IN LINE 92 OF TP1_BSE_Main.c: 'met': undefined identifier
+*** ERROR C141 IN LINE 92 OF TP1_BSE_Main.c: syntax error near '1', expected ';'
+  93   1          P6 &= OxFD; 
+*** ERROR C141 IN LINE 93 OF TP1_BSE_Main.c: syntax error near 'P6', expected ';'
+  94   1      }
+  95              
+  96          //*****************************************************************************  
 
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     54    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =      2    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  9 ERROR(S)
