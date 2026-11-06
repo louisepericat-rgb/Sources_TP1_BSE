@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    11/06/2026  16:09:04  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    11/06/2026  17:06:19  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -34,15 +34,18 @@ LINK MAP OF MODULE:  BSE_TP1 (?C_STARTUP)
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-                    0003H     07FDH                  *** GAP ***
+                    0003H     0098H                  *** GAP ***
+            CODE    009BH     0003H     ABSOLUTE     
+                    009EH     0762H                  *** GAP ***
             CODE    0800H     008CH     UNIT         ?C_C51STARTUP
-            CODE    088CH     0036H     UNIT         ?PR?MAIN?TP1_BSE_MAIN
-            CODE    08C2H     0023H     UNIT         ?PR?_SOFTWARE_DELAY?TP1_BSE_LIB_DIVERS
-            CODE    08E5H     001CH     UNIT         ?PR?SOFTWARE_DELAY_10MS?TP1_BSE_LIB_DIVERS
-            CODE    0901H     0013H     UNIT         ?PR?PORT_IO_INIT?TP1_BSE_LIB_CONFIG_GLOBALE
-            CODE    0914H     000AH     UNIT         ?PR?SOFTWARE_DELAY_10MICRO?TP1_BSE_LIB_DIVERS
-            CODE    091EH     0007H     UNIT         ?PR?RESET_SOURCES_INIT?TP1_BSE_LIB_CONFIG_GLOBALE
-            CODE    0925H     0007H     UNIT         ?PR?INIT_DEVICE?TP1_BSE_LIB_CONFIG_GLOBALE
+            CODE    088CH     0030H     UNIT         ?PR?MAIN?TP1_BSE_MAIN
+            CODE    08BCH     0023H     UNIT         ?PR?_SOFTWARE_DELAY?TP1_BSE_LIB_DIVERS
+            CODE    08DFH     001CH     UNIT         ?PR?SOFTWARE_DELAY_10MS?TP1_BSE_LIB_DIVERS
+            CODE    08FBH     0013H     UNIT         ?PR?PORT_IO_INIT?TP1_BSE_LIB_CONFIG_GLOBALE
+            CODE    090EH     000AH     UNIT         ?PR?SOFTWARE_DELAY_10MICRO?TP1_BSE_LIB_DIVERS
+            CODE    0918H     0007H     UNIT         ?PR?RESET_SOURCES_INIT?TP1_BSE_LIB_CONFIG_GLOBALE
+            CODE    091FH     0007H     UNIT         ?PR?INIT_DEVICE?TP1_BSE_LIB_CONFIG_GLOBALE
+            CODE    0926H     0006H     UNIT         ?PR?INTERRUPTION_BOUTON_INT7?TP1_BSE_MAIN
             CODE    092CH     0005H     UNIT         ?C_INITSEG
 
 
@@ -56,12 +59,12 @@ SEGMENT
 ?C_C51STARTUP
   +--> ?PR?MAIN?TP1_BSE_MAIN
   +--> ?C_INITSEG
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/06/2026  17:06:19  PAGE 2
+
+
 
 ?PR?MAIN?TP1_BSE_MAIN
   +--> ?PR?INIT_DEVICE?TP1_BSE_LIB_CONFIG_GL...
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/06/2026  16:09:04  PAGE 2
-
-
   +--> ?PR?_SOFTWARE_DELAY?TP1_BSE_LIB_DIVERS
 
 ?PR?INIT_DEVICE?TP1_BSE_LIB_CONFIG_GL...
@@ -116,13 +119,16 @@ SYMBOL TABLE OF MODULE:  BSE_TP1 (?C_STARTUP)
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0090H         PUBLIC        P1
   D:00B0H         PUBLIC        P3
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/06/2026  17:06:19  PAGE 3
+
+
+  B:00A8H.7       PUBLIC        EA
+  D:00E7H         PUBLIC        EIE2
   D:00E8H         PUBLIC        ADC0CN
   D:00A8H         PUBLIC        IE
   D:00A7H         PUBLIC        P3MDOUT
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/06/2026  16:09:04  PAGE 3
-
-
   B:00B0H.7       PUBLIC        BP
+  D:00ADH         PUBLIC        P3IF
   D:00D8H         PUBLIC        PCA0CN
   D:00B8H         PUBLIC        IP
   D:00C0H         PUBLIC        SMB0CN
@@ -135,31 +141,37 @@ SYMBOL TABLE OF MODULE:  BSE_TP1 (?C_STARTUP)
   B:0020H.1       PUBLIC        ETAT_LED
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
+  C:0926H         PUBLIC        Interruption_Bouton_INT7
   -------         PROC          MAIN
-  C:088CH         LINE#         37
-  C:088CH         LINE#         39
-  C:088FH         LINE#         40
-  C:0892H         LINE#         41
-  C:0894H         LINE#         43
+  C:088CH         LINE#         38
+  C:088CH         LINE#         40
+  C:088FH         LINE#         41
+  C:0892H         LINE#         42
   C:0894H         LINE#         44
-  C:0894H         LINE#         45
-  C:089AH         LINE#         46
-  C:089CH         LINE#         47
-  C:089EH         LINE#         48
-  C:08A0H         LINE#         49
-  C:08A3H         LINE#         50
-  C:08A5H         LINE#         51
-  C:08A5H         LINE#         53
-  C:08A8H         LINE#         54
-  C:08AAH         LINE#         55
-  C:08B1H         LINE#         56
-  C:08B3H         LINE#         57
-  C:08BAH         LINE#         58
-  C:08BAH         LINE#         59
-  C:08BDH         LINE#         60
-  C:08BFH         LINE#         61
-  C:08BFH         LINE#         62
+  C:0897H         LINE#         45
+  C:089AH         LINE#         48
+  C:089DH         LINE#         49
+  C:089FH         LINE#         52
+  C:089FH         LINE#         53
+  C:089FH         LINE#         62
+  C:08A2H         LINE#         63
+  C:08A2H         LINE#         64
+  C:08A4H         LINE#         65
+  C:08ABH         LINE#         66
+  C:08ADH         LINE#         67
+  C:08B4H         LINE#         68
+  C:08B4H         LINE#         69
+  C:08B7H         LINE#         70
+  C:08B7H         LINE#         71
+  C:08B9H         LINE#         72
+  C:08B9H         LINE#         73
   -------         ENDPROC       MAIN
+  -------         PROC          INTERRUPTION_BOUTON_INT7
+  C:0926H         LINE#         76
+  C:0926H         LINE#         78
+  C:0929H         LINE#         79
+  C:092BH         LINE#         80
+  -------         ENDPROC       INTERRUPTION_BOUTON_INT7
   -------         ENDMOD        TP1_BSE_MAIN
 
   -------         MODULE        TP1_BSE_LIB_CONFIG_GLOBALE
@@ -167,10 +179,13 @@ SYMBOL TABLE OF MODULE:  BSE_TP1 (?C_STARTUP)
   D:00FFH         PUBLIC        WDTCN
   D:00B0H         PUBLIC        P3
   D:00E8H         PUBLIC        ADC0CN
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/06/2026  17:06:19  PAGE 4
+
+
   D:00A5H         PUBLIC        P1MDOUT
   D:00A8H         PUBLIC        IE
   D:00A7H         PUBLIC        P3MDOUT
-  C:0901H         PUBLIC        Port_IO_Init
+  C:08FBH         PUBLIC        Port_IO_Init
   D:00D8H         PUBLIC        PCA0CN
   D:00B8H         PUBLIC        IP
   D:00E1H         PUBLIC        XBR0
@@ -179,94 +194,91 @@ SYMBOL TABLE OF MODULE:  BSE_TP1 (?C_STARTUP)
   D:00C0H         PUBLIC        SMB0CN
   D:00F8H         PUBLIC        SPI0CN
   D:0088H         PUBLIC        TCON
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/06/2026  16:09:04  PAGE 4
-
-
-  C:091EH         PUBLIC        Reset_Sources_Init
-  C:0925H         PUBLIC        Init_Device
+  C:0918H         PUBLIC        Reset_Sources_Init
+  C:091FH         PUBLIC        Init_Device
   D:0098H         PUBLIC        SCON0
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          RESET_SOURCES_INIT
-  C:091EH         LINE#         24
-  C:091EH         LINE#         25
-  C:091EH         LINE#         27
-  C:0921H         LINE#         28
-  C:0924H         LINE#         29
+  C:0918H         LINE#         24
+  C:0918H         LINE#         25
+  C:0918H         LINE#         27
+  C:091BH         LINE#         28
+  C:091EH         LINE#         29
   -------         ENDPROC       RESET_SOURCES_INIT
   -------         PROC          PORT_IO_INIT
-  C:0901H         LINE#         35
-  C:0901H         LINE#         36
-  C:0901H         LINE#         44
-  C:0904H         LINE#         45
-  C:0907H         LINE#         46
-  C:090AH         LINE#         49
-  C:090DH         LINE#         52
-  C:0910H         LINE#         53
-  C:0913H         LINE#         55
+  C:08FBH         LINE#         35
+  C:08FBH         LINE#         36
+  C:08FBH         LINE#         44
+  C:08FEH         LINE#         45
+  C:0901H         LINE#         46
+  C:0904H         LINE#         49
+  C:0907H         LINE#         52
+  C:090AH         LINE#         53
+  C:090DH         LINE#         55
   -------         ENDPROC       PORT_IO_INIT
   -------         PROC          INIT_DEVICE
-  C:0925H         LINE#         62
-  C:0925H         LINE#         63
-  C:0925H         LINE#         64
-  C:0928H         LINE#         65
-  C:092BH         LINE#         66
+  C:091FH         LINE#         62
+  C:091FH         LINE#         63
+  C:091FH         LINE#         64
+  C:0922H         LINE#         65
+  C:0925H         LINE#         66
   -------         ENDPROC       INIT_DEVICE
   -------         ENDMOD        TP1_BSE_LIB_CONFIG_GLOBALE
 
   -------         MODULE        TP1_BSE_LIB_DIVERS
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0914H         PUBLIC        Software_Delay_10micro
+  C:090EH         PUBLIC        Software_Delay_10micro
   D:00E8H         PUBLIC        ADC0CN
   D:00A8H         PUBLIC        IE
   D:00D8H         PUBLIC        PCA0CN
   D:00B8H         PUBLIC        IP
-  C:08C2H         PUBLIC        _Software_Delay
+  C:08BCH         PUBLIC        _Software_Delay
   D:00C0H         PUBLIC        SMB0CN
   D:00F8H         PUBLIC        SPI0CN
   D:0088H         PUBLIC        TCON
-  C:08E5H         PUBLIC        Software_Delay_10ms
+  C:08DFH         PUBLIC        Software_Delay_10ms
   D:0098H         PUBLIC        SCON0
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/06/2026  17:06:19  PAGE 5
+
+
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          SOFTWARE_DELAY_10MS
   -------         DO            
   D:000CH         SYMBOL        i
   -------         ENDDO         
-  C:08E5H         LINE#         22
-  C:08E5H         LINE#         23
-  C:08E5H         LINE#         25
-  C:0900H         LINE#         26
+  C:08DFH         LINE#         22
+  C:08DFH         LINE#         23
+  C:08DFH         LINE#         25
+  C:08FAH         LINE#         26
   -------         ENDPROC       SOFTWARE_DELAY_10MS
   -------         PROC          _SOFTWARE_DELAY
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/06/2026  16:09:04  PAGE 5
-
-
   D:0008H         SYMBOL        hundredth_second
   -------         DO            
   D:000AH         SYMBOL        i
   -------         ENDDO         
-  C:08C2H         LINE#         36
-  C:08C6H         LINE#         37
-  C:08C6H         LINE#         40
-  C:08D7H         LINE#         41
-  C:08D7H         LINE#         42
-  C:08DAH         LINE#         43
-  C:08E4H         LINE#         44
+  C:08BCH         LINE#         36
+  C:08C0H         LINE#         37
+  C:08C0H         LINE#         40
+  C:08D1H         LINE#         41
+  C:08D1H         LINE#         42
+  C:08D4H         LINE#         43
+  C:08DEH         LINE#         44
   -------         ENDPROC       _SOFTWARE_DELAY
   -------         PROC          SOFTWARE_DELAY_10MICRO
-  C:0914H         LINE#         51
-  C:0914H         LINE#         52
-  C:0914H         LINE#         55
-  C:0915H         LINE#         56
-  C:0916H         LINE#         57
-  C:0917H         LINE#         58
-  C:0918H         LINE#         59
-  C:0919H         LINE#         60
-  C:091AH         LINE#         61
-  C:091BH         LINE#         62
-  C:091CH         LINE#         63
-  C:091DH         LINE#         64
+  C:090EH         LINE#         51
+  C:090EH         LINE#         52
+  C:090EH         LINE#         55
+  C:090FH         LINE#         56
+  C:0910H         LINE#         57
+  C:0911H         LINE#         58
+  C:0912H         LINE#         59
+  C:0913H         LINE#         60
+  C:0914H         LINE#         61
+  C:0915H         LINE#         62
+  C:0916H         LINE#         63
+  C:0917H         LINE#         64
   -------         ENDPROC       SOFTWARE_DELAY_10MICRO
   -------         ENDMOD        TP1_BSE_LIB_DIVERS
 
@@ -274,8 +286,8 @@ SYMBOL TABLE OF MODULE:  BSE_TP1 (?C_STARTUP)
     SEGMENT: ?PR?SOFTWARE_DELAY_10MICRO?TP1_BSE_LIB_DIVERS
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00B3H BYTE ( 8%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00B6H BYTE ( 8%) *
 ******************************************************************************
 
-Program Size: data=15.2 xdata=0 code=308
+Program Size: data=15.2 xdata=0 code=311
 LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

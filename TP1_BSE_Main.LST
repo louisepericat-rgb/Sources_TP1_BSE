@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   TP1_BSE_MAIN                                                      11/06/2026 16:09:04 PAGE 1   
+C51 COMPILER V9.59.0.0   TP1_BSE_MAIN                                                      11/06/2026 17:06:19 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TP1_BSE_MAIN
@@ -34,46 +34,63 @@ line level    source
   25          bit ETAT_LED = 1; // si clignote(1) ou eteint(0)
   26          
   27          
-  28          //------------------------------------------------------------------------------------
-  29          // Function Prototypes
-  30          
-  31          //------------------------------------------------------------------------------------
+  28          
+  29          //------------------------------------------------------------------------------------
+  30          // Function Prototypes
+  31          
   32          //------------------------------------------------------------------------------------
-  33          
-  34          //-----------------------------------------------------------------------------
-  35          // MAIN Routine
-  36          //-----------------------------------------------------------------------------
-  37          void main (void) {
-  38   1        
-  39   1              Init_Device();
-  40   1              P3MDOUT &= 0x7F; // masque pour bit 7 à 0
-  41   1              BP = 1; // ouvre le drain 
-  42   1        
-  43   1              while(1)
-  44   1              {  
-  45   2                if( BP == 1 && ACK_BP == 1 ){
-  46   3                  ACK_BP = 0;
-  47   3                  ETAT_LED = !ETAT_LED;
-  48   3                }
-  49   2                else if ( BP == 0 ){
-  50   3                  ACK_BP = 1;
-  51   3                }
-  52   2              
-  53   2                if ( ETAT_LED == 1){
-  54   3                 LED = LED_ON;
-  55   3                 Software_Delay(2); // Temporisation 20ms
-C51 COMPILER V9.59.0.0   TP1_BSE_MAIN                                                      11/06/2026 16:09:04 PAGE 2   
+  33          //------------------------------------------------------------------------------------
+  34          
+  35          //-----------------------------------------------------------------------------
+  36          // MAIN Routine
+  37          //-----------------------------------------------------------------------------
+  38          void main (void) {
+  39   1        
+  40   1              Init_Device();
+  41   1              P3MDOUT &= 0x7F; // masque pour bit 7 à 0
+  42   1              BP = 1; // ouvre le drain 
+  43   1              
+  44   1              P3IF &= 0xF7; //masque bit 3 à 0
+  45   1              P3IF &= 0x7F; //masque bit 7 à 0
+  46   1        
+  47   1        //configure un GPIO:
+  48   1              EIE2 |= 0x20; // interupteur int7 au bit 5
+  49   1              EA = 1;   // interupteur général
+  50   1              
+  51   1        
+  52   1              while(1)
+  53   1              {  
+  54   2                /*if( BP == 1 && ACK_BP == 1 ){
+  55   2                  ACK_BP = 0;
+C51 COMPILER V9.59.0.0   TP1_BSE_MAIN                                                      11/06/2026 17:06:19 PAGE 2   
 
-  56   3                 LED = LED_OFF;
-  57   3                 Software_Delay(10); // Temporisation 100ms   
-  58   3                }
-  59   2                if  ( ETAT_LED == 0){
-  60   3                  LED = LED_OFF;
-  61   3                }
-  62   2              }                           
-  63   1            }
-  64              
-  65          //*****************************************************************************  
+  56   2                  ETAT_LED = !ETAT_LED;
+  57   2                }
+  58   2                else if ( BP == 0 ){
+  59   2                  ACK_BP = 1;
+  60   2                }*/
+  61   2      
+  62   2                if ( ETAT_LED == 1)
+  63   2                {
+  64   3                 LED = LED_ON;
+  65   3                 Software_Delay(2); // Temporisation 20ms
+  66   3                 LED = LED_OFF;
+  67   3                 Software_Delay(10); // Temporisation 100ms   
+  68   3                }
+  69   2                if  ( ETAT_LED == 0)
+  70   2                {
+  71   3                  LED = LED_OFF;
+  72   3                }
+  73   2              }                           
+  74   1            }
+  75          
+  76          void Interruption_Bouton_INT7(void)interrupt 19
+  77          {
+  78   1          P3IF &= 0x7F;
+  79   1          ETAT_LED = !ETAT_LED;
+  80   1      }
+  81              
+  82          //*****************************************************************************  
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
